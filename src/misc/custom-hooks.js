@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useReducer, useEffect, useState, useRef, useCallback } from 'react';
 import { apiGet } from './config';
 
@@ -99,10 +100,12 @@ export function useShow(showId) {
 
     return state;
 }
+
 export function useWhyDidYouUpdate(name, props) {
     // Get a mutable ref object where we can store props ...
     // ... for comparison next time this hook runs.
     const previousProps = useRef();
+
     useEffect(() => {
         if (previousProps.current) {
             // Get all keys from previous and current props
@@ -120,11 +123,13 @@ export function useWhyDidYouUpdate(name, props) {
                     };
                 }
             });
+
             // If changesObj not empty then output to console
             if (Object.keys(changesObj).length) {
                 console.log('[why-did-you-update]', name, changesObj);
             }
         }
+
         // Finally update previousProps with current props for next hook call
         previousProps.current = props;
     });
